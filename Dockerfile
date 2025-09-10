@@ -17,4 +17,9 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+# Fix permissions for Laravel logs and cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
+    && touch /var/www/html/storage/logs/laravel.log \
+    && chmod 664 /var/www/html/storage/logs/laravel.log
+
 CMD ["/start.sh"]
