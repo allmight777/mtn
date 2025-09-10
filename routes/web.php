@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
     // 10 derniers utilisateurs actifs
     $recentUsers = User::where('is_actif', 0)
         ->orderByDesc('created_at')
+        
         ->take(10)
         ->get(['nom', 'prenom', 'matricule', 'email', 'contact']);
 

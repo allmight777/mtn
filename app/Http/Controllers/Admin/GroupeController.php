@@ -98,6 +98,9 @@ class GroupeController extends Controller
             });
         }
 
+
+
+
         if ($request->filled('is_admin')) {
             $query->where('is_admin', $request->is_admin);
         }
