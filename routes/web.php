@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/healthz', function () {
+    return response()->json(['status' => 'ok']);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
