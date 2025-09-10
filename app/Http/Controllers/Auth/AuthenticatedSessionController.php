@@ -30,12 +30,11 @@ class AuthenticatedSessionController extends Controller
 
         $user = auth()->user();
 
-        if ($user->is_admin) {
-            // Si l'utilisateur est admin
-            return redirect()->route('dashboard');
+        // Vérifie si l'utilisateur est admin
+        if ($user->groupe_id == 2) {
+            return redirect()->route('dashboard'); 
         } else {
-            // Si l'utilisateur est un simple utilisateur
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.dashboard'); // Utilisateur simple
         }
     }
 

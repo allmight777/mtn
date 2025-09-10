@@ -6,34 +6,41 @@
         {{-- Cards statistiques --}}
         <div class="cards-container mb-4">
 
+            <a href="{{ route('gestionUser') }}" class="text-decoration-none">
+                <div class="card p-3 shadow-sm hover-shadow border border-primary"
+                    style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; background-color: #d0ebff;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="text-muted">Gestion des utilisateurs</h5>
+
+                        </div>
+                        <i class="bi bi-people-fill fs-1 text-primary"></i>
+                    </div>
+                </div>
+            </a>
+
+
             <a href="{{ route('sites.index') }}" class="text-decoration-none">
                 <div class="card p-3 shadow-sm hover-shadow border border-success"
                     style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; background-color: #d1f8f1;">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="text-muted">Gestion des sites</h5>
-                            <h3 class="fw-bold text-dark">{{ $totalSites }}</h3>
+                          {{--  <h3 class="fw-bold text-dark">{{ $totalSites }}</h3>  --}}
                         </div>
                         <i class="bi bi-building fs-1 text-success"></i>
                     </div>
                 </div>
             </a>
 
-            <div class="card p-3 shadow-sm">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h5>Utilisateurs</h5>
-                        <h3>{{ $totalUsers ?? 120 }}</h3>
-                    </div>
-                    <i class="bi bi-people fs-1 text-success"></i>
-                </div>
-            </div>
+
+
 
             <div class="card p-3 shadow-sm">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h5>Admins</h5>
-                        <h3>{{ $totalAdmins ?? 5 }}</h3>
+                       <h3>{{ $totalAdmins ?? 5 }}</h3>
                     </div>
                     <i class="bi bi-person-badge fs-1 text-primary"></i>
                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\GroupeController;
 use App\Http\Controllers\Admin\SiteController;
 use App\Http\Controllers\Admin\StatsController;
 use App\Http\Controllers\ProfileController;
@@ -22,7 +23,7 @@ Route::get('/dashboard', function () {
     $totalSites = Site::count();
 
     // 10 derniers utilisateurs actifs
-    $recentUsers = User::where('is_actif', 1)
+    $recentUsers = User::where('is_actif', 0)
         ->orderByDesc('created_at')
         ->take(10)
         ->get(['nom', 'prenom', 'matricule', 'email', 'contact']);
@@ -51,6 +52,20 @@ Route::get('/dashboard', function () {
 
 // Route pour les fonctionnalite de l'admin
 Route::middleware(['auth'])->group(function () {
+
+    // Route gestion utilisateurs
+    Route::get('/gestionusers', [GroupeController::class, 'gestionUser'])->name('gestionUser');
+
+    // Route pour gérer les groupes
+    Route::resource('groupes', GroupeController::class);
+
+    // Gestion des utilisateurs
+    Route::get('users', [GroupeController::class, 'indexUsers'])->name('users.index');
+    Route::get('users/create', [GroupeController::class, 'createUser'])->name('users.create');
+    Route::post('users', [GroupeController::class, 'storeUser'])->name('users.store');
+    Route::get('users/{user}/edit', [GroupeController::class, 'editUser'])->name('users.edit');
+    Route::put('users/{user}', [GroupeController::class, 'updateUser'])->name('users.update');
+    Route::delete('users/{user}', [GroupeController::class, 'destroyUser'])->name('users.destroy');
 
     // Route pour gérer les sites
     Route::resource('sites', SiteController::class);

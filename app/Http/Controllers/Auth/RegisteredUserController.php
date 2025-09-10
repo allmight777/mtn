@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,32 +26,36 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'nom' => ['required', 'string', 'max:255'],
-            'prenom' => ['required', 'string', 'max:255'],
-            'matricule' => ['required', 'string', 'max:50', 'unique:users,matricule'],
-            'contact' => ['required', 'string', 'max:20'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    $request->validate([
+        'nom' => ['required', 'string', 'max:255'],
+        'prenom' => ['required', 'string', 'max:255'],
+        'matricule' => ['required', 'string', 'max:50', 'unique:users,matricule'],
+        'contact' => ['required', 'string', 'max:20'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        $user = User::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
-            'matricule' => $request->matricule,
-            'contact' => $request->contact,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'is_admin' => 0,
-            'is_actif' => 0,
-        ]);
+    // Récupérer l'id du Groupe A
+    $groupeA = \App\Models\Groupe::where('nom', 'Groupe A')->first();
 
-        event(new Registered($user));
+    $user = \App\Models\User::create([
+        'nom' => $request->nom,
+        'prenom' => $request->prenom,
+        'matricule' => $request->matricule,
+        'contact' => $request->contact,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'is_admin' => 0,
+        'is_actif' => 0,
+        'groupe_id' => $groupeA ? $groupeA->id : null, 
+    ]);
 
-        return redirect()->route('register')->with('success',
-            'Votre compte a été créé avec succès ! Merci de vérifier votre boîte mail, votre compte sera validé par un administrateur sous 72 heures.'
-        );
+    event(new Registered($user));
 
-    }
+    return redirect()->route('register')->with('success',
+        'Votre compte a été créé avec succès ! Merci de vérifier votre boîte mail, votre compte sera validé par un administrateur sous 72 heures.'
+    );
+}
+
 }
