@@ -155,7 +155,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">Aucun utilisateur actif trouvé</td>
+                                <td colspan="5" class="text-center">Aucun utilisateur non actif trouvé</td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -285,7 +285,7 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-color);
+    color: black;
     padding: 18px 15px;
     font-size: 15px;
     font-family: var(--nav-font);
@@ -312,7 +312,7 @@ h6 {
   .navmenu li:hover>a,
   .navmenu .active,
   .navmenu .active:focus {
-    color: var(--nav-hover-color);
+    color: white;
   }
 
   .navmenu .dropdown ul {
@@ -510,6 +510,25 @@ h6 {
   position: relative;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
+
+.footer-custom {
+  background-color: #ffffff; /* Bleu très clair */
+  color: #003366;            /* Bleu foncé pour le texte */
+  font-size: 15px;
+  padding: 60px 0;
+  border-top: 2px solid #b3d1f1;
+}
+
+.footer-custom p {
+  color: #003366;
+  margin-bottom: 6px;
+}
+
+.footer-brand .footer-text {
+  font-weight: 400;
+  line-height: 1.6;
+}
+
 
 .footer .footer-brand h1,
 .footer .footer-brand .logo {
@@ -2063,7 +2082,7 @@ section,
   .skills .skill-item {
     padding: 1.25rem;
   }
-}
+}background-color: rgb(161, 227, 243);
 
 /*--------------------------------------------------------------
 # Services Section
